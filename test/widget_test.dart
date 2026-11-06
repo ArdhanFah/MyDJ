@@ -10,11 +10,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mydj/main.dart';
 
 void main() {
-  testWidgets('MyDJ home page renders', (WidgetTester tester) async {
+  testWidgets('MyDJ login page renders', (WidgetTester tester) async {
     await tester.pumpWidget(const MyApp());
 
-    expect(find.text('Jurnal Harian Guru'), findsOneWidget);
-    expect(find.text('Lihat Jurnal'), findsOneWidget);
-    expect(find.text('Buat Jurnal'), findsOneWidget);
+    expect(find.text('MyDJ - Welcome'), findsOneWidget);
+    expect(find.text('Nama Pengguna'), findsOneWidget);
+    expect(find.text('Login'), findsOneWidget);
   });
 }

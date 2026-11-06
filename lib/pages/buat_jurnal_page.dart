@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/data/data_provider.dart';
 import 'package:mydj/data/jurnal.dart';
+import 'package:mydj/components/media_selector.dart';
 import 'package:provider/provider.dart';
 
 class BuatJurnalPage extends StatefulWidget {
@@ -154,6 +155,14 @@ class _BuatJurnalPageState extends State<BuatJurnalPage> {
                 'Tuliskan Dimensi Profil Pelajar Pancasila',
                 (text) => dimensiProfilPelajarPancasila = text,
               ),
+              const SizedBox(height: 10),
+              const Text('Foto Kegiatan'),
+              const SizedBox(height: 10),
+              const MediaSelector(),
+              const SizedBox(height: 10),
+              const Text('Video Kegiatan'),
+              const SizedBox(height: 10),
+              const MediaSelector(mediaType: MediaType.video),
               const SizedBox(height: 10),
               SizedBox(
                 width: double.infinity,
