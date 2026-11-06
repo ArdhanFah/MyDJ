@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/components/password_field.dart';
+import 'package:mydj/data/data_provider.dart';
+import 'package:mydj/pages/login_page.dart';
+import 'package:provider/provider.dart';
 
 class AkunPage extends StatefulWidget {
   const AkunPage({super.key, required this.title});
@@ -16,12 +19,24 @@ class _AkunPageState extends State<AkunPage> {
   String konfirmasiSandi = '';
 
   void _savePassword() {
+    if (!context.read<DataProvider>().verifyPassword(sandiSaatIni)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Sandi saat ini salah')),
+      );
+      return;
+    }
     if (sandiBaru.isEmpty || sandiBaru != konfirmasiSandi) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Konfirmasi sandi tidak sesuai')),
       );
       return;
     }
+    setState(() {
+      context.read<DataProvider>().changePassword(sandiBaru);
+      sandiSaatIni = '';
+      sandiBaru = '';
+      konfirmasiSandi = '';
+    });
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Sandi berhasil disimpan')),
     );
@@ -68,8 +83,13 @@ class _AkunPageState extends State<AkunPage> {
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Keluar'),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (_) => const LoginPage()),
+                  );
+                },
+                child: const Text('Login'),
               ),
             ),
           ],

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mydj/components/password_field.dart';
+import 'package:mydj/data/data_provider.dart';
 import 'package:mydj/pages/simple_home_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -16,7 +18,8 @@ class _LoginPageState extends State<LoginPage> {
   String sandi = '';
 
   void login() {
-    if (namaPengguna == 'guru' && sandi == 'guru') {
+    if (namaPengguna == 'guru' &&
+        context.read<DataProvider>().verifyPassword(sandi)) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
